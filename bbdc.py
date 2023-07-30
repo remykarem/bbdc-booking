@@ -89,7 +89,7 @@ class SlotResponseData(BaseModel):
     releasedSlotMonthList: list[SlotMonth]
     releasedSlotListGroupByDay: dict[str, list[Slot]]
 
-    def get_available_sessions_by_session(self, *sessions) -> list[Slot]:
+    def get_available_slots_by_sessions(self, *sessions: int) -> list[Slot]:
 
         session_names = [f"SESSION {session}" for session in sessions]
         
@@ -208,7 +208,7 @@ def main():
     )
 
     # Output the data we want
-    print(slot_response.data.releasedSlotMonthList)
+    print(slot_response.data.get_available_slots_by_sessions(5, 6))
 
 
 if __name__ == "__main__":
